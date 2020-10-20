@@ -5,10 +5,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'eHawker') }}</title>
+    <title>@yield('title', $page_title ?? '')</title>
 
     <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,9 +23,13 @@
     <link href="{{ asset('css/elegant-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/slicknav.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/default.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/layout/landing-page.css') }}">
+    <!-- owl css -->
+    <link rel="stylesheet" href="{{asset('css/layout/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/layout/owl.theme.default.min.css')}}">
+    @yield('styles')
 
 </head>

@@ -6,5 +6,8 @@
     <script src="{{asset('js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('js/mixitup.min.js')}}"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{asset('js/default.js')}}"></script>
+
+    <!-- owl js -->
+    <script src="{{asset('js/layout/jquery.min.js')}}"></script>
+    <script src="{{asset('js/layout/owl.carousel.min.js')}}"></script>
