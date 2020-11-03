@@ -1,8 +1,6 @@
 .info-section {
 	padding-bottom: 50px;
 }
-
-
 .info-section .product-categories {
 	position: relative;
 }
@@ -152,10 +150,9 @@
 }
 
 .info-slide {
-	height: 431px;
+	height: 550px;
 	display: flex;
 	align-items: center;
-	padding-left: 75px;
 }
 
 .slide-content span {

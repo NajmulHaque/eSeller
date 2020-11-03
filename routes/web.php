@@ -13,14 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/' , 'PageController@landingPage');
-Route::get('/signup' , function ()
-{
-	return view('pages.signup');
-})->name('customer.signup');
-Auth::routes();
+Route::get('/vendor-dashboard' , 'PageController@vendor')->name('vendor-dashboard');
+Route::get('/contact' , 'PageController@contact')->name('contact');
+Route::get('/shop' , 'ShopController@index')->name('shop');
+Route::get('/shop/product' , 'ShopController@product')->name('shop.product');
+Route::get('/shop/cart' , 'ShopController@cart')->name('shop.cart');
+Route::get('/shop/checkout' , 'ShopController@checkout')->name('shop.checkout');
+Route::get('/signup' , function (){
+	return view('auth.signup');})->name('user.signup');
+Route::get('/login' , function (){
+	return view('auth.login');})->name('login');
 
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

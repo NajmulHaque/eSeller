@@ -1,26 +1,18 @@
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <!-- <a href="#"><h2>eSeller</h2></a> -->
-                        <h2><a href="#">BSVCOS</a></h2>
+                <div class="col-lg-2">
+                    <div class="header__logo mt-2">
+                        <a href="/"><h3 style="color: rgb(255, 191, 0); font-weight: bold">eVendor</h3></a>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="#">Shop Details</a></li>
-                                    <li><a href="#">Shoping Cart</a></li>
-                                    <li><a href="#">Check Out</a></li>
-                                    <li><a href="#">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{route('customer.signup')}}">Sign Up</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="{{ route('shop') }}">Shop</a></li>
+                            <li><a href="{{route('user.signup')}}">Sign Up</a></li>
+                            <li><a href="{{route('login')}}">Login</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
