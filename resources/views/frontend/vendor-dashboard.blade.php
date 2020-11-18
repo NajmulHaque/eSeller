@@ -98,6 +98,12 @@
         transform: rotate(90deg)
     }
 
+    div#info {
+        border: 2px solid orange;
+        margin-top: 8px;
+        padding: 6px;
+    }
+
     @media(min-width:992px) {
         #profile {
             width: 75px;
@@ -161,45 +167,66 @@
             margin-top: 5%
         }
     }
+    contact-form form textarea {
+    width: 100%;
+    height: 150px;
+    font-size: 16px;
+    color: #6f6f6f;
+    padding-left: 20px;
+    margin-bottom: 24px;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    padding-top: 12px;
+    resize: none;
+}
 
-   
+    /* dummy css for send message */
+        
 </style>
 @endsection
 @section('content')
 <div class="container border-bottom bg-white mt-1 pt-md-3 pt-2">
+    @forelse ($vendorDetails as $vendorDetail)
     <div class="d-flex flex-md-row justify-content-around align-items-center">
-        <div class="d-flex flex-md-row align-items-center">
+        <div class="d-flex flex-md-row align-items-center pt-5">
             <div class="p-md-2">
-                <img src="{{asset('images/vendor/vendor.jpg')}}" alt="" class="rounded-circle" id="profile"><br>
-                <span>&#9734; &#9734; &#9734; &#9734; &#9734;</span>
+                <p class="pl-3"><img src="{{asset('images/vendor/vendor.jpg')}}" alt="" id="profile"><br></p>
+                <span>
+                    @for ($i = 1; $i < 6; $i++) <i
+                        class="fa fa-star{{($i<=$vendorDetail->rating) ? '':'No Reviews Yet'}} text-warning"></i>
+                        @endfor
+                </span>
             </div>
-            <div class="p-md-2 p-1" id="info">
-                <h5>Issac Farhan</h5>
-                <div class="text-muted">Fruit Vendor</div>
+            <div id="vendor-info" class="pl-3 mb-2">
+                <h4 style="font-size: 22px"><i class="far fa-edit pr-2"></i>{{$vendorDetail->name}}</h
+                        style="font-size: 22px">
+                    <div class="text-primary pt-2" style="font-size: 20px"><i
+                            class="fas fa-business-time pr-2"></i>{{$vendorDetail->categoryName}}</div>
             </div>
         </div>
         <div class="d-flex flex-column" id="info">
-            <div class="p-md-1 text-muted"> <span class="fa fa-envelope p-1 rounded-circle"></span> vendor@gmail.com
+            <div class="p-md-1 text-muted"> <span class="fa fa-envelope p-1 rounded-circle"></span>
+                {{$vendorDetail->name}}@gmail.com
             </div>
             <div class="p-md-1 pt-sm-1 text-muted"> <span class="fa fa-phone bg-light p-1 rounded-circle"></span>
-                +880170000000</div>
+                {{$vendorDetail->phone}}</div>
         </div>
         <div class="rounded p-lg-2 p-1" id="blue-background">
             <div class="d-flex flex-md-row align-items-center">
                 <div class="d-flex flex-column align-items-center px-lg-3 px-md-2 px-1" id="border-right">
-                    <p class="h4">40</p>
+                    <p class="h4 text-info">{{$totalVendorProducts}}</p>
                     <div class="text-muted" id="count">Total Product</div>
                 </div>
                 <div class="d-flex flex-column align-items-center px-lg-3 px-md-2 px-1" id="border-right">
-                    <p class="h4">117</p>
+                    <p class="h4 text-danger">17</p>
                     <div class="text-muted" id="count">Total Sell</div>
                 </div>
                 <div class="d-flex flex-column align-items-center px-lg-3 px-md-2 px-1" id="border-right">
-                    <p class="h4">58</p>
+                    <p class="h4 text-primary">{{$totalVendorReview}}</p>
                     <div class="text-muted" id="count">Customer Review</div>
                 </div>
                 <div class="d-flex flex-column align-items-center px-lg-4 px-md-2 px-sm-1 px-2">
-                    <p class="h5 font-weight-bold">Fruits</p>
+                    <p class="h5 font-weight-bold text-warning">{{$vendorDetail->categoryName}}</p>
                     <div class="text-muted" id="count">Business Category</div>
                 </div>
             </div>
@@ -211,172 +238,137 @@
                 <li class="active" data-filter=".selling-product">Selling Products</li>
                 <li data-filter=".details">Vendor Details</li>
                 <li data-filter=".customer-review">Customer Review</li>
-                <li data-filter=".contact">Direct Contact</li>
+                <li data-filter=".send-message">Send Message</li>
             </ul>
         </div>
     </div>
 
     <div class="row featured__filter px-5 justify-content-center">
-        <div class="col-lg-10 col-md-10 col-sm-10 mix details">
+        <div class="col-lg-10 col-md-10 col-sm-10 mix details" style="display: none">
             <div class="featured__item">
-                <h3 class="text-center pb-5">Vendor Basic Information</h3>
+                {{-- <h3 class="text-center pb-5">Vendor Basic Information</h3> --}}
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td>Vendor Id</td>
-                            <td><input type="" name="" placeholder="123"></td>
+                            <td>Vendor id</td>
+                            <td>{{$vendorDetail->id}}</td>
                         </tr>
                         <tr>
                             <td>Name:</td>
-                            <td><input id="name" type="text" name="name" placeholder="Issac Farhan" required></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td><input id="email" type="" name="email" placeholder="farhan@gmail.com" required></td>
+                            <td>{{$vendorDetail->name}}</td>
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td><input type="text" name="address" placeholder="Bashundhara, Dhaka"></td>
+                            <td>{{$vendorDetail->address}}</td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
-                            <td><input type="text" name="phone" placeholder="+0170000000"></td>
+                            <td>{{$vendorDetail->phone}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="col-lg-10 col-md-10 col-sm-10 mix selling-product">
+        <div class="col-lg-10 col-md-10 col-sm-10 mix selling-product" style="display: ">
             <div class="featured__item">
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
-                                </select>
+                                <input type="text" placeholder="Search Product">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>16</span> Products found</h6>
+                                <h6><span>{{$totalVendorProducts}}</span> Products found</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
                             <div class="filter__option">
-                                <i class="fas fa-bars"></i>
+                                <i class="fas fa-bars" style="cursor: pointer;"></i>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    @forelse ($vendorProducts as $vendorProduct)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="{{asset('images/product/product-1.jpg')}}">
+                            <div class="product__item__pic set-bg" data-setbg="{{asset($vendorProduct->image)}}">
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="{{ route('shop.product',$vendorProduct->id) }}"><i
+                                                class="fa fa-retweet"></i></a></li>
                                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h6><a href="#">Meat</a></h6>
-                                <h5>৳300.00</h5>
+                                <h6><a href="#">{{$vendorProduct->name}} {{$vendorProduct->details}}</a></h6>
+                                <h5>৳{{$vendorProduct->price}}</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="{{asset('images/product/product-2.jpg')}}">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Banana</a></h6>
-                                <h5>৳50.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="{{asset('images/product/product-3.jpg')}}">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Guava</a></h6>
-                                <h5>৳100.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="{{asset('images/product/product-4.jpg')}}">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Grape</a></h6>
-                                <h5>৳130.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="{{asset('images/product/product-7.jpg')}}">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Watermelon</a></h6>
-                                <h5>৳200.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="{{asset('images/product/product-6.jpg')}}">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Mango</a></h6>
-                                <h5>৳80.00</h5>
-                            </div>
-                        </div>
+                    @empty
+                    <div>No Product Add Yet</div>
+                    @endforelse
+                </div>
+                {{$vendorProducts->links()}}
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-md-10 col-sm-10 mix customer-review row py-5" style="display: none">
+            @forelse ($vendorReviews as $productReview)
+            <div class="row pb-5">
+                <div class="col-md-2">
+                    <img class="rounded-circle" src="{{asset($productReview->avatar)}}"
+                        class="img img-rounded img-fluid" />
+                    <p class="text-secondary text-center">
+                        {{ Carbon\Carbon::parse($productReview->created_at)->diffForHumans()}}
+                    </p>
+                </div>
+                <div class="col-md-10">
+                    <a class="float-left" href=""><strong>{{$productReview->name}}</strong></a>
+                    <span style="float: right">
+                        @for ($i = 1; $i < 6; $i++) <i
+                            class="text-warning fa fa-star{{($i<=$productReview->rating) ? '':'No reviews Yet'}}"></i>
+                            @endfor
+                    </span>
+                    <div class="clearfix"></div>
+                    <p style="width: 80%;font-size: 18px">{{$productReview->comments}}</p>
+                    <div>
+                        {{-- <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a> --}}
+                        <a class="float-right btn text-white btn-danger"> 
+                            <i class="fa fa-heart"></i> Like
+                        </a>
                     </div>
                 </div>
-                <div class="product__pagination">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                </div>
+            </div>
+            @empty
+                <div>No Review Yet</div>
+            @endforelse
+            {{$vendorReviews->links()}}
+        </div>
+        <div class="contact-form spad mix send-message" style="display: none">
+            <div class="container">
+                <form method="POST" action="{{ route('user.message') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <textarea name="message" placeholder="Type your message..."></textarea>
+                            <button type="submit" class="site-btn">SEND MESSAGE</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    @empty
+        <div>No Data Found</div>
+    @endforelse
 </div>
+@endsection
+@section('scripts')
+<script>
+
+</script>
 @endsection

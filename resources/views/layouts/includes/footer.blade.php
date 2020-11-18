@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-<footer class="page-footer font-small elegant-color" style="color: ; background: #F3F6FA; margin-top: 100px">
+<footer class="page-footer font-small elegant-color" style="background: rgb(255, 191, 0); color: black">
   <div class="color-primary">
     <div class="container">
       <div class="row py-4 d-flex align-items-center">
@@ -61,16 +61,16 @@
         <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
         <ul class="list-unstyled foot-desc">
           <li class="mb-2">
-            <a href="#!">Your Account</a>
+            <a href="#">Your Account</a>
           </li>
           <li class="mb-2">
-            <a href="#!">Become an Affiliate</a>
+            <a href="#">Become an Affiliate</a>
           </li>
           <li class="mb-2">
-            <a href="#!">Shipping Rates</a>
+            <a href="#">Shipping Rates</a>
           </li>
           <li class="mb-2">
-            <a href="#!">Help</a>
+            <a href="#">Help</a>
           </li>
         </ul>
       </div>

@@ -10,13 +10,15 @@
                 <div class="col-lg-6 col-md-6 pl-5">
                     <a href="/">Home</a>
                     <i class="fa fa-chevron-right breadcrumb-separator"></i>
-                    <span><a href="">Shop</a></span>
+                    <span><a href="{{route('shop.index')}}">Shop</a></span>
                     <i class="fa fa-chevron-right breadcrumb-separator"></i>
                     <span></span>
                 </div>
                 <div class="col-md-6 col-lg-6 text-right">
-                    <i class="fa fa-search" style="position: absolute; left: 340px;top: 14px;"></i>
-                    <input style="padding: 5px 50px 5px 35px;" type="search" name="" id="" placeholder="Search for product">
+                    <form action="{{ route('search') }}" method="GET" class="search-form">
+                        <i class="fa fa-search search-icon" style="position: absolute; left: 340px;top: 14px;"></i>
+                        <input style="padding: 5px 50px 5px 35px;" type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Search for product" required>
+                    </form>
                 </div>
             </div>
         </div>
@@ -27,10 +29,10 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4>Category</h4>
                             <ul>
-                                @foreach ($categories as $item)
-                                    <li><a href="#">{{$item->name}}</a></li>
+                                @foreach ($categories as $category)
+                                    <li class="{{$category->slug}}"><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{$category->name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -57,64 +59,36 @@
                                     <h4>Latest Products</h4>
                                     <div class="carousel-item active">
                                         <div class="latest-prdouct__slider__item">
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{asset('images/product-pictures/Spinach/Kolmi-Shak.jpg')}}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>Kolmi Shak</h6>
-                                                    <span>৳15.00</span>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{asset('images/product-pictures/Meat/Beef.jpg')}}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>Beef</h6>
-                                                    <span>৳600.00</span>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{asset('images/product-pictures/Vegetables/Tomato.jpg')}}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>Tomato</h6>
-                                                    <span>৳130.00</span>
-                                                </div>
-                                            </a>
+                                            @foreach ($latestProducts as $latestproduct)
+                                            <div class="latest-prdouct__slider__item">
+                                                <a href="#" class="latest-product__item">
+                                                    <div class="latest-product__item__pic">
+                                                        <img src="{{ $latestproduct->image }}" alt="">
+                                                    </div>
+                                                    <div class="latest-product__item__text">
+                                                        <h6>{{ $latestproduct->name}} {{ $latestproduct->details}}</h6>
+                                                        <span>৳{{ $latestproduct->price}}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="carousel-item">
                                         <div class="latest-prdouct__slider__item">
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>Prawn Big</h6>
-                                                    <span>৳450.00</span>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>Crab Pool Security</h6>
-                                                    <span>৳30.00</span>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{asset('images/product-pictures/Fruits/Malta.jpg')}}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>Malta</h6>
-                                                    <span>৳170.00</span>
-                                                </div>
-                                            </a>
+                                            @foreach ($latestProducts as $latestproduct)
+                                            <div class="latest-prdouct__slider__item">
+                                                <a href="#" class="latest-product__item">
+                                                    <div class="latest-product__item__pic">
+                                                        <img src="{{ $latestproduct->image }}" alt="">
+                                                    </div>
+                                                    <div class="latest-product__item__text">
+                                                        <h6>{{ $latestproduct->name}} {{ $latestproduct->details}}</h6>
+                                                        <span>৳{{ $latestproduct->price}}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -130,13 +104,14 @@
                                     <span>Sort By</span>
                                     <select name="" id="">
                                         <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                        <option value="1">name</option>
+                                        <option value="2">price</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6><span>{{$totalProducts}}</span> Products found</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -148,192 +123,53 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Fish/Deshi-Pangas.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Deshi Pangas</a></h6>
-                                    <h5>৳120.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Fruits/Apple.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Apple</a></h6>
-                                    <h5>৳130.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Fish/Kachki.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">kachki Fish</a></h6>
-                                    <h5>৳230.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Vegetables/Taro-Root.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Taro Root</a></h6>
-                                    <h5>৳30.00</h5>
+                        @forelse ($products as $product)
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ $product->image }}">
+                                        <ul class="product__item__pic__hover">
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-heart"></i>
+                                                {{-- <form action="{{route('wishlist.store')}}" id="contact_form" method="POST">
+                                                    @csrf
+                                                    <input name="user_id" type="hidden" value="{{Auth::user()->id}}" />
+                                                    <input name="product_id" type="hidden" value="{{$product->id}}" />
+                                                    <button title="add to heart" id="product-cart-btn">
+                                                        <i title="add to heart" class="fa fa-heart"></i>
+                                                    </button>
+                                                  </form> --}}
+                                               </a>
+                                            </li>
+                                            <li><a href="{{ route('shop.product',$product->id) }}"><i class="fa fa-retweet"></i></a></li>
+                                            <li>
+                                                <form action="{{ route('cart.store') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $product->id }}" id="id" name="id">
+                                                    <input type="hidden" value="{{ $product->name }}" id="name" name="name">
+                                                    <input type="hidden" value="{{ $product->price }}" id="price" name="price">
+                                                    <input type="hidden" value="{{ $product->details }}" id="details"
+                                                        name="details">
+                                                    <input type="hidden" value="{{ $product->image }}" id="img" name="img">
+                                                    <input type="hidden" value="{{ $product->slug }}" id="slug" name="slug">
+                                                    <input type="hidden" value="1" id="quantity" name="quantity">
+                                                    <button title="add to cart" id="product-cart-btn">
+                                                        <i title="add to cart" class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">{{ $product->name }} {{ $product->details}}</a></h6>
+                                        <h5>৳{{ $product->price }}</h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Fish/Tengra-Fish.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Tengra Fish</a></h6>
-                                    <h5>৳330.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Vegetables/Sweet-Pumpkin.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Sweet Pumpkin</a></h6>
-                                    <h5>৳35.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Fish/Shing-Fish.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Shing Fish</a></h6>
-                                    <h5>৳380.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Vegetables/Onion.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Onion</a></h6>
-                                    <h5>৳80.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Spinach/Laal-Shak.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Laal Shak</a></h6>
-                                    <h5>৳25.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Meat/Broiler-Chicken.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">broiler Chicken</a></h6>
-                                    <h5>৳110.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Spinach/Data-Shak.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Data Shak</a></h6>
-                                    <h5>৳20.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/product-pictures/Fruits/Green-Coconut.jpg')}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Green Cocunut</a></h6>
-                                    <h5>৳50.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                        @empty
+                            <div style="text-align: left">No items found</div>
+                        @endforelse
+                        {{ $products->links() }}
                     </div>
                 </div>
             </div>

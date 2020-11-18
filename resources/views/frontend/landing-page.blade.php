@@ -13,19 +13,21 @@
     a:hover {
         color: black;
     }
-    .carousel-inner h4 {
-    font-weight: 700;
-    color: #1c1c1c;
-    margin-bottom: 45px;
-}
-.carousel-control-prev-icon {
-	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
-}
 
-.carousel-control-next-icon {
-	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
-}
-#product-custom-category{}
+    .carousel-inner h4 {
+        font-weight: 700;
+        color: #1c1c1c;
+        margin-bottom: 45px;
+    }
+
+    .carousel-control-prev-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+    }
+
+    .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+    }
+    .nice-select { border: none}
 </style>
 @endsection
 @section('content')
@@ -41,8 +43,8 @@
                         </div>
                         <div class="category-option">
                             <ul>
-                                @foreach ($categories as $item)
-                                    <li><a href="#">{{$item->name}}</a></li>
+                                @foreach ($categories as $category)
+                                    <li class="{{$category->slug}}"><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{$category->name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -50,17 +52,20 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="product-search">
+                <div class="">
                     <div class="row">
                         <div class="col-md-9">
                             <div class="info-search">
                                 <div class="info-search-form">
-                                    <form action="">
-                                        <div class="search-categories">
-                                            <p>All Categories</p><span><i class="fas fa-angle-down"></i></span>
-                                        </div>
+                                    <form action="{{ route('search') }}" method="GET">
                                         <div class="search-box">
-                                            <input type="text" name="search" placeholder="type your product name">
+                                            <select name="" id="category-select">
+                                                <option value="">All Categories</option>
+                                                @foreach ($categories as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="text" name="query" placeholder="type your product name">
                                             <button style="background-color: #FFA500" type="submit"
                                                 class="btn">search</button>
                                         </div>
@@ -103,60 +108,30 @@
             <div class="carousel-item active">
                 <div class="container">
                     <div class="row align-items-center">
+                        @forelse ($slideCategories as $item)
                         <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Fruits/Apple.jpg')}}">
-                                <h5><a href="#">Fresh Fruit</a></h5>
+                            <div class="categories__item set-bg" data-setbg="{{$item->image}}">
+                                <h5><a href="{{ route('shop.index', ['category' => $item->slug]) }}">{{$item->name}}</a></h5>
                             </div>
                         </div>
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Meat/Local-Chicken-Deshi-Murgi.jpg')}}">
-                                <h5><a href="#">Fresh Meat</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Vegetables/Gourd.jpg')}}">
-                                <h5><a href="#">Fresh Vegetables</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Fish/Hilsha-Fish.jpg')}}">
-                                <h5><a href="#">Fresh Fish</a></h5>
-                            </div>
-                        </div>
+                        @empty
+                        <div>No data found</div>
+                        @endforelse
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="container">
                     <div class="row align-items-center">
+                        @forelse ($slideCategories2 as $item)
                         <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Spinach/Pui-Shak.jpg')}}">
-                                <h5><a href="#">Spinach </a></h5>
+                            <div class="categories__item set-bg" data-setbg="{{$item->image}}">
+                                <h5><a href="/shop">{{$item->name}}</a></h5>
                             </div>
                         </div>
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Fruits/Apple.jpg')}}">
-                                <h5><a href="#">Fresh Fruit</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Meat/Local-Chicken-Deshi-Murgi.jpg')}}">
-                                <h5><a href="#">Fresh Meat</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{asset('images/product-pictures/Vegetables/Gourd.jpg')}}">
-                                <h5><a href="#">Fresh Vegetables</a></h5>
-                            </div>
-                        </div>
+                        @empty
+                        <div>No data found</div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -181,146 +156,50 @@
                 </div>
                 <div class="featured__controls">
                     <ul>
-                        <li class="active" data-filter="*">All</li>
-                        <li data-filter=".fruits">Fresh Fruits</li>
-                        <li data-filter=".fresh-meat">Fresh Meat</li>
-                        <li data-filter=".vegetables">Fresh Vegetables</li>
-                        <li data-filter=".fish">Fresh Fish</li>
-                        <li data-filter=".spinach">Spinach (shak)</li>
+                        @foreach ($categories as $category)
+                        <li data-filter=".{{ $category->slug }}">{{ $category->name }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row featured__filter">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
+            @foreach ($categoryProducts as $categoryProduct)
+            <div class="col-lg-3 col-md-4 col-sm-6 mix {{$categoryProduct->slug}}" style="display: ">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fruits/Grapes.jpg')}}">
+                    <div class="featured__item__pic set-bg" data-setbg="{{$categoryProduct->image}}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="{{ route('shop.product',$categoryProduct->id) }}">
+                                    <i class="fa fa-retweet"></i></a>
+                            </li>
+                            <li>
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" value="{{ $categoryProduct->id }}" id="id" name="id">
+                                    <input type="hidden" value="{{ $categoryProduct->name }}" id="name" name="name">
+                                    <input type="hidden" value="{{ $categoryProduct->price }}" id="price" name="price">
+                                    <input type="hidden" value="{{ $categoryProduct->details }}" id="details"
+                                        name="details">
+                                    <input type="hidden" value="{{ $categoryProduct->image }}" id="img" name="img">
+                                    <input type="hidden" value="{{ $categoryProduct->slug }}" id="slug" name="slug">
+                                    <input type="hidden" value="1" id="quantity" name="quantity">
+                                    <button title="add to cart" id="product-cart-btn">
+                                        <i title="add to cart" class="fa fa-shopping-cart"></i>
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">Grape</a></h6>
-                        <h5>৳30.00</h5>
+                        <h6><a href="#">{{$categoryProduct->name}} {{$categoryProduct->details}}</a></h6>
+                        <h5>৳{{$categoryProduct->price}}</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fruits/Guava.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Guava</a></h6>
-                        <h5>৳30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fish">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Banana</a></h6>
-                        <h5>৳30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fruits/Pomegranate.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Pomegranate</a></h6>
-                        <h5>৳30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Vegetables/Gourd.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Pineapple</a></h6>
-                        <h5>৳30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fruits/Grapes-Red.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Grapes Red</a></h6>
-                        <h5>৳30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Meat/Beef.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Green Apple</a></h6>
-                        <h5>৳30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix spinach">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Spinach/Kolmi-Shak.jpg')}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Mango</a></h6>
-                        <h5>৳20.00</h5>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
+        {{ $categoryProducts->links()}}
     </div>
 </section>
 
@@ -331,65 +210,33 @@
                 <div class="carousel-inner">
                     <h4>Latest Products</h4>
                     <div class="carousel-item active">
+                        @foreach ($latestProducts as $latestproduct)
                         <div class="latest-prdouct__slider__item">
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Spinach/Kolmi-Shak.jpg')}}" alt="">
+                                    <img src="{{ $latestproduct->image }}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Kolmi Shak</h6>
-                                    <span>৳15.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Meat/Beef.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Beef</h6>
-                                    <span>৳600.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Vegetables/Tomato.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Tomato</h6>
-                                    <span>৳130.00</span>
+                                    <h6>{{ $latestproduct->name}} {{ $latestproduct->details}}</h6>
+                                    <span>৳{{ $latestproduct->price}}</span>
                                 </div>
                             </a>
                         </div>
+                        @endforeach
                     </div>
                     <div class="carousel-item">
                         <div class="latest-prdouct__slider__item">
+                            @foreach ($latestProducts as $latestProduct)
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
+                                    <img src="{{ $latestProduct->image}}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Prawn Big</h6>
-                                    <span>৳450.00</span>
+                                    <h6>{{ $latestProduct->name }} {{ $latestproduct->details}}</h6>
+                                    <span>৳{{ $latestProduct->price }}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>৳30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fruits/Malta.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Malta</h6>
-                                    <span>৳170.00</span>
-                                </div>
-                            </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -401,64 +248,32 @@
                     <h4>Top Rated Products</h4>
                     <div class="carousel-item active">
                         <div class="latest-prdouct__slider__item">
+                            @foreach ($topRatedProducts as $topRatedProduct)
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Spinach/Kochi-Data-Shak.jpg')}}" alt="">
+                                    <img src="{{ $topRatedProduct->image}}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Kochi Data Shak</h6>
-                                    <span>৳25.00</span>
+                                    <h6>{{ $topRatedProduct->name }} {{ $topRatedProduct->details }}</h6>
+                                    <span>৳{{ $topRatedProduct->price}}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Prawn Big</h6>
-                                    <span>৳450.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fruits/Malta.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Malta</h6>
-                                    <span>৳170.00</span>
-                                </div>
-                            </a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="latest-prdouct__slider__item">
+                            @foreach ($topRatedProducts as $topRatedProduct)
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Spinach/Kolmi-Shak.jpg')}}" alt="">
+                                    <img src="{{ $topRatedProduct->image}}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Kolmi Shak</h6>
-                                    <span>৳15.00</span>
+                                    <h6>{{ $topRatedProduct->name }} {{ $topRatedProduct->details }}</h6>
+                                    <span>৳{{ $topRatedProduct->price}}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Meat/Beef.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Beef</h6>
-                                    <span>৳600.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Vegetables/Tomato.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Tomato</h6>
-                                    <span>৳130.00</span>
-                                </div>
-                            </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -470,64 +285,32 @@
                     <h4>Review Products</h4>
                     <div class="carousel-item active">
                         <div class="latest-prdouct__slider__item">
+                            @foreach ($reviewProducts as $reviewProduct)
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fish/Tengra-Fish.jpg')}}" alt="">
+                                    <img src="{{$reviewProduct->image}}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Tengra Fish</h6>
-                                    <span>৳600.00</span>
+                                    <h6>{{$reviewProduct->name}} {{$reviewProduct->details}}</h6>
+                                    <span>৳{{$reviewProduct->price}}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Vegetables/Ash-Gourd.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Ash Gourd</h6>
-                                    <span>৳30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fruits/Boroi.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Boroi</h6>
-                                    <span>৳150.00</span>
-                                </div>
-                            </a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="latest-prdouct__slider__item">
+                            @foreach ($reviewProducts as $reviewProduct)
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
+                                    <img src="{{$reviewProduct->image}}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Prawn Big</h6>
-                                    <span>৳450.00</span>
+                                    <h6>{{$reviewProduct->name}} {{$reviewProduct->details}}</h6>
+                                    <span>৳{{$reviewProduct->price}}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>৳30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{asset('images/product-pictures/Fruits/Malta.jpg')}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Malta</h6>
-                                    <span>৳170.00</span>
-                                </div>
-                            </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -596,4 +379,32 @@
 @endsection
 @section('scripts')
 
+<script>
+    $(document).ready(function () {
+        $('#car').on('click',function () {
+            $('.car').show();
+            $('.bus').hide();
+            $('.van').hide();
+            $(this).addClass('active');
+            $("#van").removeClass('active');
+            $("#bus").removeClass('active');
+        });
+        $('#van').on('click',function () {
+            $('.car').hide();
+            $('.bus').hide();
+            $('.van').show();
+            $("#van").addClass('active');
+            $("#car").removeClass('active');
+            $("#bus").removeClass('active');
+        });
+        $('#bus').on('click',function () {
+            $('.car').hide();
+            $('.bus').show();
+            $('.van').hide();
+            $("#bus").addClass('active');
+            $("#car").removeClass('active');
+            $("#van").removeClass('active');
+        });
+    });
+</script>
 @endsection

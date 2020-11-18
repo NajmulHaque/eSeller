@@ -1,3 +1,15 @@
+footer a,p{
+	color: #000;
+}
+footer h5{
+	font-weight: bold;
+}
+a:hover,
+a:focus {
+	text-decoration: none;
+	outline: none;
+	color: blue;
+}
 .info-section {
 	padding-bottom: 50px;
 }
@@ -115,6 +127,7 @@
 	right: 0;
 	top: -1px;
 	height: 50px;
+	width: 70px;
 }
 
 .info-contact {

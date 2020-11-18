@@ -18,13 +18,15 @@
         <div class="col-md-6 col-lg-6 pl-5">
             <a href="/">Home</a>
             <i class="fa fa-chevron-right breadcrumb-separator"></i>
-            <span><a href="">Shop</a></span>
+            <span><a href="{{route('shop.index')}}">Shop</a></span>
             <i class="fa fa-chevron-right breadcrumb-separator"></i>
-            <span></span>
+            <span><a href="#">Product</a></span>
         </div>
         <div class="col-md-6 col-lg-6 text-right">
-            <i class="fa fa-search" style="position: absolute; left: 340px;top: 14px;"></i>
-            <input style="padding: 5px 50px 5px 35px;" type="search" name="" id="" placeholder="Search for vendor">
+            <form action="{{ route('vendor-search') }}" method="GET" class="search-form">
+                <i class="fa fa-search search-icon" style="position: absolute; left: 340px;top: 14px;"></i>
+                <input style="padding: 5px 50px 5px 35px;" type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Area Search for Vendor" required>
+            </form>
         </div>
     </div>
 </div>
@@ -34,43 +36,49 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
-                        <img height="300px" style="min-width: 85% !important" class="product__details__pic__item--large"
-                            src="{{asset('images/product-pictures/Vegetables/Onion.jpg')}}" alt="">
+                        <img height="300px" style="min-width: 80% !important" class="product__details__pic__item--large"
+                            src="{{asset($productDetails->image)}}" alt="">
                     </div>
                     <div>
-                        <img width="100px" height="100px"
-                            data-imgbigurl="{{asset('images/product-pictures/Vegetables/Tomato.jpg')}}"
-                            src="{{asset('images/product-pictures/Vegetables/Onion.jpg')}}" alt="">
+                        <img width="100px" height="100px" src="{{asset($productDetails->image)}}" alt="">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
-                    <h3>Onion</h3>
+                    <h3>{{$productDetails->name}}</h3>
                     <div class="product__details__rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-half-o"></i>
-                        <span>(18 reviews)</span>
+                        <span>({{$totalProductReviews}} reviews)</span>
                     </div>
-                    <div class="product__details__price">৳ 50.00</div>
+                    <div class="product__details__price">৳ {{$productDetails->price}}</div>
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
                         <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                        <li><b>Weight</b> <span>1 kg</span></li>
+                        <li><b>Weight</b> <span>{{$productDetails->details}}</span></li>
                     </ul>
-                    <div class="product__details__quantity">
-                        {{-- <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
-                        </div> --}}
-                        <input type="number" class="form-control text-center py-4" value="1">
+                    <div class="row">
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{ $productDetails->id }}" id="id" name="id">
+                            <input type="hidden" value="{{ $productDetails->name }}" id="name" name="name">
+                            <input type="hidden" value="{{ $productDetails->price }}" id="price" name="price">
+                            <input type="hidden" value="{{ $productDetails->details }}" id="details" name="details">
+                            <input type="hidden" value="{{ $productDetails->image }}" id="img" name="img">
+                            <input type="hidden" value="{{ $productDetails->slug }}" id="slug" name="slug">
+                            <input type="hidden" value="1" id="quantity" name="quantity">
+                            <button style="text-transform: uppercase" class="btn btn-info btn-md" class="tooltip-test" title="add to cart">
+                                <i class="fa fa-shopping-cart pr-3" style="font-size: 20px"></i> add to cart
+                            </button>
+                        </form>
                     </div>
-                    <a href="{{ route('shop.cart') }}" class="primary-btn" style="text-transform: uppercase">add to
-                        cart</a>
+                    {{-- <a href="{{ route('cart.index') }}" class="primary-btn" style="text-transform: uppercase">add
+                    to
+                    cart</a> --}}
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 px-5">
@@ -78,11 +86,11 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                aria-selected="true">Description</a>
+                                aria-selected="true">Product Description</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                aria-selected="false">Reviews <span>(1)</span></a>
+                                aria-selected="false">Product Reviews <span>({{$totalProductReviews}})</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -97,17 +105,20 @@
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <ul style="list-style-type: none">
-                                    <li>
-                                        <a href="{{ route('vendor-dashboard') }}">
-                                            <img width="80px" height="80px" src="{{asset('images/user2.jpg')}}">
-                                        </a>
-                                        <span>
-                                            <i class="fa fa-star-half-o" style="font-size: 20px"></i><i
-                                                class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i
-                                                class="fa fa-star checked"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                        </span>
-                                        <p>Mr. Nurul</p>
-                                    </li>
+                                    @forelse ($productReviews as $productReview)
+                                    <a href="#">
+                                        <img width="80px" height="80px" src="{{asset($productReview->avatar)}}">
+                                    </a>
+                                    <span class="pl-5">
+                                        @for ($i = 1; $i < 6; $i++) <i
+                                            class="fa fa-star{{($i<=$productReview->rating) ? '':'No Reviews Yet'}}">
+                                            </i>
+                                            @endfor
+                                    </span>
+                                    <p>{{$productReview->name}}</p>
+                                    @empty
+
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
@@ -118,123 +129,32 @@
             <div class="col-md-5 col-lg-5 product__details__tab">
                 <div id="product-vendor" style="background-color: #f5f5f5;">
                     <h4 class="py-3 text-center" style="background-color: rgb(255, 191, 0);">Product Vendors</h4>
-                    <ul style="list-style-type: none" style="">
+                    <ul style="list-style-type: none;padding-top: 10px" style="">
+                        @forelse ($productVendors as $productVendor)
                         <li>
-                            <a href="{{ route('vendor-dashboard') }}">
-                                <img width="80px" height="80px" src="{{asset('images/user2.jpg')}}">
+                            <a href="{{ route('vendor-dashboard',$productVendor->id) }}">
+                                <img width="80px" height="80px" src="{{asset($productVendor->avatar)}}">
                             </a>
-                            <span>
-                                <i class="fa fa-star-half-o" style="font-size: 20px"></i><i
-                                    class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i
-                                    class="fa fa-star checked"></i><i class="fa fa-star"></i>
+                            <span class="pl-5">
+                                @for ($i = 1; $i < 6; $i++) <i
+                                    class="fa fa-star{{($i<=$productVendor->rating) ? '':'No rating found'}}"></i>
+                                    @endfor
                             </span>
-                            <p class="pl-3">Mr. Nurul</p>
+                            <p class="pl-3">{{$productVendor->name}}</p>
                         </li>
-                        <li>
-                            <a href="{{ route('vendor-dashboard') }}">
-                                <img width="80px" height="80px" src="{{asset('images/user2.jpg')}}">
-                            </a>
-                            <span>
-                                <i class="fa fa-star-half-o" style="font-size: 20px"></i><i
-                                    class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i
-                                    class="fa fa-star checked"></i>
-                            </span>
-                            <p class="pl-3">Mr. Issac</p>
-                        </li>
-                        <li>
-                            <a href="{{ route('vendor-dashboard') }}">
-                                <img width="80px" height="80px" src="{{asset('images/user2.jpg')}}">
-                            </a>
-                            <span>
-                                <i class="fa fa-star-half-o" style="font-size: 20px"></i><i
-                                    class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i
-                                    class="fa fa-star checked"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                            </span>
-                            <p class="pl-3">Mr. Sahed</p>
-                        </li>
+                        <hr>
+                        @empty
+                        <div class="text-center">
+                            <h5 class="text-danger font-weight-bold">No Vendors Found Yet!</h5>
+                        </div>
+                        @endforelse
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="related-product">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title related__product__title">
-                    <h2>You might also like...</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Vegetables/Gourd.jpg')}}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Gourid</a></h6>
-                        <h5>৳35.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fish/Prawn-Big.jpg')}}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">prawn Big</a></h6>
-                        <h5>৳630.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Fruits/Apple.jpg')}}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Apple</a></h6>
-                        <h5>৳170.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg"
-                        data-setbg="{{asset('images/product-pictures/Meat/Local-Chicken-Deshi-Murgi.jpg')}}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Deshi Murgi</a></h6>
-                        <h5>৳140.00</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('frontend.might-like')
 @endsection
 @section('scripts')
 

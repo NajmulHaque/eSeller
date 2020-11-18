@@ -12,102 +12,235 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        // Laptops
-        for ($i=1; $i <= 30; $i++) {
             Product::create([
-                'name' => 'Laptop '.$i,
-                'slug' => 'laptop-'.$i,
-                'details' => [13,14,15][array_rand([13,14,15])] . ' inch, ' . [1, 2, 3][array_rand([1, 2, 3])] .' TB SSD, 32GB RAM',
-                'price' => rand(149999, 249999),
-                'description' =>'Lorem '. $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/laptop-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
-            ])->categories()->attach(1);
-        }
-
-        // Make Laptop 1 a Desktop as well. Just to test multiple categories
-        $product = Product::find(1);
-        $product->categories()->attach(2);
-
-        // Desktops
-        for ($i = 1; $i <= 9; $i++) {
-            Product::create([
-                'name' => 'Desktop ' . $i,
-                'slug' => 'desktop-' . $i,
-                'details' => [24, 25, 27][array_rand([24, 25, 27])] . ' inch, ' . [1, 2, 3][array_rand([1, 2, 3])] . ' TB SSD, 32GB RAM',
-                'price' => rand(249999, 449999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/desktop-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
-            ])->categories()->attach(2);
-        }
-
-        // Phones
-        for ($i = 1; $i <= 9; $i++) {
-            Product::create([
-                'name' => 'Phone ' . $i,
-                'slug' => 'phone-' . $i,
-                'details' => [16, 32, 64][array_rand([16, 32, 64])] . 'GB, 5.' . [7, 8, 9][array_rand([7, 8, 9])] . ' inch screen, 4GHz Quad Core',
-                'price' => rand(79999, 149999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/phone-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
-            ])->categories()->attach(3);
-        }
-
-        // Tablets
-        for ($i = 1; $i <= 9; $i++) {
-            Product::create([
-                'name' => 'Tablet ' . $i,
-                'slug' => 'tablet-' . $i,
-                'details' => [16, 32, 64][array_rand([16, 32, 64])] . 'GB, 5.' . [10, 11, 12][array_rand([10, 11, 12])] . ' inch screen, 4GHz Quad Core',
-                'price' => rand(49999, 149999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/tablet-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
-            ])->categories()->attach(4);
-        }
-
-        // TVs
-        for ($i = 1; $i <= 9; $i++) {
-            Product::create([
-                'name' => 'TV ' . $i,
-                'slug' => 'tv-' . $i,
-                'details' => [46, 50, 60][array_rand([7, 8, 9])] . ' inch screen, Smart TV, 4K',
-                'price' => rand(79999, 149999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/tv-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
+                // 'category_id' => 5,
+                'name' => 'Hilsha Fish ',
+                'slug' => 'hilsa',
+                'details' => '1 kg',
+                'price' => '1000',
+                'description' =>'Ilish or Hilsha is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Hilsha-Fish.jpg',
             ])->categories()->attach(5);
-        }
-
-        // Cameras
-        for ($i = 1; $i <= 9; $i++) {
             Product::create([
-                'name' => 'Camera ' . $i,
-                'slug' => 'camera-' . $i,
-                'details' => 'Full Frame DSLR, with 18-55mm kit lens.',
-                'price' => rand(79999, 249999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/camera-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
-            ])->categories()->attach(6);
-        }
-
-        // Appliances
-        for ($i = 1; $i <= 9; $i++) {
+                'name' => 'Prawn Big ',
+                'slug' => 'prawn-big',
+                'details' => '1 kg',
+                'price' => '550',
+                'description' =>'Prawn is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Prawn-Big.jpg',
+            ])->categories()->attach(5);
             Product::create([
-                'name' => 'Appliance ' . $i,
-                'slug' => 'appliance-' . $i,
-                'details' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, dolorum!',
-                'price' => rand(79999, 149999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/appliance-'.$i.'.jpg',
-                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
-            ])->categories()->attach(7);
-        }
+                'name' => 'Deshi Pangas',
+                'slug' => 'pangas',
+                'details' => '1 kg',
+                'price' => '130',
+                'description' =>'Pangas is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Deshi-Pangas.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Kachki',
+                'slug' => 'kachki',
+                'details' => '500 gm',
+                'price' => '400',
+                'description' =>'kachki is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/kachki.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Koi',
+                'slug' => 'koi',
+                'details' => '1 kg',
+                'price' => '160',
+                'description' =>'Koi or Hilsha is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Koi-Fish.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Magur',
+                'slug' => 'magur',
+                'details' => '1 kg',
+                'price' => '250',
+                'description' =>'Magur is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Magur-Fish.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Prawn Small',
+                'slug' => 'prawn-small',
+                'details' => '1 kg',
+                'price' => '450',
+                'description' =>'Prawn small is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Prawn-Small.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Punti',
+                'slug' => 'punti',
+                'details' => '500 gm',
+                'price' => '350',
+                'description' =>'Punti is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Punti-Fish.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Rui',
+                'slug' => 'roi',
+                'details' => '1 kg',
+                'price' => '480',
+                'description' =>'Rui or Hilsha is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Rui-Fish.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Shing',
+                'slug' => 'shing',
+                'details' => '1 kg',
+                'price' => '150',
+                'description' =>'Shing is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Shing-Fish.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Tengra',
+                'slug' => 'tengra',
+                'details' => '1 kg',
+                'price' => '350',
+                'description' =>'Tengra small is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Tengra-Fish.jpg',
+            ])->categories()->attach(5);
+            Product::create([
+                'name' => 'Tilapia',
+                'slug' => 'tilapia',
+                'details' => '1 kg',
+                'price' => '220',
+                'description' =>'Tilapia is a national fish of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fish in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fish/Tilapia-Fish.jpg',
+            ])->categories()->attach(5);
+            // fish category product end here
 
-        // Select random entries to be featured
-        Product::whereIn('id', [1, 12, 22, 31, 41, 43, 47, 51, 53,61, 69, 73, 80])->update(['featured' => true]);
+            Product::create([
+                'name' => 'Apple',
+                'slug' => 'apple',
+                'details' => '1 kg',
+                'price' => '180',
+                'description' =>'Fruit is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Apple.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Banana',
+                'slug' => 'banana',
+                'details' => '1 dozen',
+                'price' => '120',
+                'description' =>'banana is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Banana.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Boroi',
+                'slug' => 'boroi',
+                'details' => '1 kg',
+                'price' => '90',
+                'description' =>'Boroi is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Boroi.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Cocunut',
+                'slug' => 'coconut',
+                'details' => '1 piece',
+                'price' => '80',
+                'description' =>'Cocunut is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Cocunut.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Dates',
+                'slug' => 'dates',
+                'details' => '1 kg',
+                'price' => '750',
+                'description' =>'dates is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Dates.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Grapes',
+                'slug' => 'grapes',
+                'details' => '1 kg',
+                'price' => '250',
+                'description' =>'Grapes is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Grapes.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Grapes Red',
+                'slug' => 'grapes-red',
+                'details' => '1 kg',
+                'price' => '550',
+                'description' =>'Grapes red is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Grapes-Red.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Green Apple',
+                'slug' => 'green-apple',
+                'details' => '1 kg',
+                'price' => '200',
+                'description' =>'Green Apple is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Green-Apple.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Green Cocunut',
+                'slug' => 'green-cocunut',
+                'details' => '1 piece',
+                'price' => '60',
+                'description' =>'Green Cocunut is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Green-Cocunut.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Guava',
+                'slug' => 'guava',
+                'details' => '1 kg',
+                'price' => '150',
+                'description' =>'Guava is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Guava.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Hog Plum',
+                'slug' => 'hog-plum',
+                'details' => '1 kg',
+                'price' => '350',
+                'description' =>'Hog Plum small is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Hog-plum.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Malta',
+                'slug' => 'malta',
+                'details' => '1 kg',
+                'price' => '220',
+                'description' =>'Malta is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Malta.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Green Cocunut',
+                'slug' => 'green-cocunut',
+                'details' => '1 piece',
+                'price' => '60',
+                'description' =>'Green Cocunut is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Green-Cocunut.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Guava',
+                'slug' => 'guava',
+                'details' => '1 kg',
+                'price' => '150',
+                'description' =>'Guava is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Guava.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Hog Plum',
+                'slug' => 'hog-plum',
+                'details' => '1 kg',
+                'price' => '350',
+                'description' =>'Hog Plum small is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fruit and rich in essential omega 3 fatty acids. n Bangladesh this fruit is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Hog-plum.jpg',
+            ])->categories()->attach(1);
+            Product::create([
+                'name' => 'Malta',
+                'slug' => 'malta',
+                'details' => '1 kg',
+                'price' => '220',
+                'description' =>'Malta is a national fruit of Bangladesh. Ilish body is strongly compressed and moderately deep with dorsal and ventral profile equally convex. It is considered to be one of most favorite and delicious fruit in the world. t is an oily fish and rich in essential omega 3 fatty acids. n Bangladesh this fish is prepared in varity of way like it can be smoked, fried, steamed, baked, prepared with mustard seed paste, curd, brinjal (eggplant). Some common hilsa menus are Fried hilsa, Khichuri-Ilish, Sorshe Ilish, Panta Ilish,Vapa Ilish etc.It has cultural value in Bangali’s life. It is an obvious food in many cultural festival like Pahela Boishakh, Saraswati Puja.',
+                'image' => 'images/product-pictures/Fruits/Malta.jpg',
+            ])->categories()->attach(1);
+
+            // Select random entries to be featured
+            Product::whereIn('id', [1, 12, 22, 31, 41, 43, 47, 51, 53,61, 69, 70])->update(['featured' => true]);
     }
 }
