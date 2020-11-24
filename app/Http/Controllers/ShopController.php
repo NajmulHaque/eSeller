@@ -81,7 +81,7 @@ class ShopController extends Controller
         $query = $request->input('query');
         $vendors = Vendor::search($query)->paginate(10);
 
-        return view('frontend.search-vendor-results')->with([
+        return view('frontend.vendorSearch')->with([
             'vendors' => $vendors,
         ]);
     }

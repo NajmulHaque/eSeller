@@ -1,9 +1,9 @@
 <style>
     .active {
-        background-color: red !important;
+        color: #7fad39;
         border-radius: 10px;
         color: white;
-    }
+}
 </style>
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-none">
     <div class="container">
@@ -20,8 +20,12 @@
         <div class="collapse navbar-collapse header__menu col-lg-9" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/')}}">Home</a>
+                    <a class="nav-link active" href="{{url('/')}}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/shop">Shop</a>
@@ -29,10 +33,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
                 <li class="nav-item">
