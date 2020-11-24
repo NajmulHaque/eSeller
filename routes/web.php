@@ -32,7 +32,7 @@ Route::get('/shop/checkout' , 'CheckoutController@index')->name('checkout.index'
 Route::post('/shop/checkout', 'CheckoutController@store')->name('checkout.store');
 Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 Route::get('/vendor-dashboard/{id}' , 'VendorController@index')->name('vendor-dashboard');
+Route::post('/user/message', 'UserController@message')->name('user.message');
 
 Auth::routes();
 Route::get('/home', 'UserController@index')->name('home');
-Route::post('/user/messgae', 'UserController@message')->name('user.message');

@@ -31,8 +31,8 @@ class UserController extends Controller
             'userDetails' => $userDetails,
         ]);
     }
-    public function message()
+    public function message(Request $request)
     {
-        
+        dd($request->toArray());
     }
 }

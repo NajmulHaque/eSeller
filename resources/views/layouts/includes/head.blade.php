@@ -26,6 +26,7 @@
     <link href="{{ asset('css/slicknav.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/default.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/layout/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/layout/landing-page.css') }}">
     <!-- owl css -->
     <link rel="stylesheet" href="{{asset('css/layout/owl.carousel.min.css')}}">
