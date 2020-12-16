@@ -1,6 +1,10 @@
 @extends('layouts.default')
 @section('styles')
 <style>
+    .home {
+        color: #7fad39 !important;
+        font-weight: bold;
+    }
     .latest-product__item__pic img {
         width: 110px !important;
         height: 100px !important;
@@ -27,7 +31,10 @@
     .carousel-control-next-icon {
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
     }
-    .nice-select { border: none}
+
+    .nice-select {
+        border: none
+    }
 </style>
 @endsection
 @section('content')
@@ -44,7 +51,9 @@
                         <div class="category-option">
                             <ul>
                                 @foreach ($categories as $category)
-                                    <li class="{{$category->slug}}"><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{$category->name}}</a></li>
+                                <li class="{{$category->slug}}"><a
+                                        href="{{ route('shop.index', ['category' => $category->slug]) }}">{{$category->name}}</a>
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -95,115 +104,7 @@
         </div>
     </div>
 </div>
-
-<div class="container-fluid">
-    <div id="categories" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ul class="carousel-indicators">
-            <li data-target="#categories" data-slide-to="0" class="active"></li>
-            <li data-target="#categories" data-slide-to="1"></li>
-        </ul>
-        <!-- The slideshow -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container">
-                    <div class="row align-items-center">
-                        @forelse ($slideCategories as $item)
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="{{$item->image}}">
-                                <h5><a href="{{ route('shop.index', ['category' => $item->slug]) }}">{{$item->name}}</a></h5>
-                            </div>
-                        </div>
-                        @empty
-                        <div>No data found</div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row align-items-center">
-                        @forelse ($slideCategories2 as $item)
-                        <div class="col-md-3 col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="{{$item->image}}">
-                                <h5><a href="/shop">{{$item->name}}</a></h5>
-                            </div>
-                        </div>
-                        @empty
-                        <div>No data found</div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#categories" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#categories" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
-
-<section class="featured spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Featured Product</h2>
-                </div>
-                <div class="featured__controls">
-                    <ul>
-                        @foreach ($categories as $category)
-                        <li data-filter=".{{ $category->slug }}">{{ $category->name }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row featured__filter">
-            @foreach ($categoryProducts as $categoryProduct)
-            <div class="col-lg-3 col-md-4 col-sm-6 mix {{$categoryProduct->slug}}" style="display: ">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{{$categoryProduct->image}}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="{{ route('shop.product',$categoryProduct->id) }}">
-                                    <i class="fa fa-retweet"></i></a>
-                            </li>
-                            <li>
-                                <form action="{{ route('cart.store') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" value="{{ $categoryProduct->id }}" id="id" name="id">
-                                    <input type="hidden" value="{{ $categoryProduct->name }}" id="name" name="name">
-                                    <input type="hidden" value="{{ $categoryProduct->price }}" id="price" name="price">
-                                    <input type="hidden" value="{{ $categoryProduct->details }}" id="details"
-                                        name="details">
-                                    <input type="hidden" value="{{ $categoryProduct->image }}" id="img" name="img">
-                                    <input type="hidden" value="{{ $categoryProduct->slug }}" id="slug" name="slug">
-                                    <input type="hidden" value="1" id="quantity" name="quantity">
-                                    <button title="add to cart" id="product-cart-btn">
-                                        <i title="add to cart" class="fa fa-shopping-cart"></i>
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">{{$categoryProduct->name}} {{$categoryProduct->details}}</a></h6>
-                        <h5>৳{{$categoryProduct->price}}</h5>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-        {{ $categoryProducts->links()}}
-    </div>
-</section>
-
-<div class="container" id="product-custom-category">
+<div class="container pt-5" id="product-custom-category">
     <div class="row">
         <div class="col-md-4 col-lg-4">
             <div id="latest-product" class="carousel slide" data-ride="carousel">
@@ -318,93 +219,13 @@
         </div>
     </div>
 </div>
-<section class="from-blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title from-blog__title">
-                    <h2>From The Blog</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="{{asset('images/product-pictures/Vegetables/Ladies-Finger.jpg')}}" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2020</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="{{asset('images/product-pictures/Fruits/Banana.jpg')}}" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> June 14,2020</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="{{asset('images/product-pictures/Vegetables/Lemon.jpg')}}" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> September 4,2010</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">Visit the clean farm in the US</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 @endsection
 @section('scripts')
-
 <script>
     $(document).ready(function () {
-        $('#car').on('click',function () {
-            $('.car').show();
-            $('.bus').hide();
-            $('.van').hide();
-            $(this).addClass('active');
-            $("#van").removeClass('active');
-            $("#bus").removeClass('active');
-        });
-        $('#van').on('click',function () {
-            $('.car').hide();
-            $('.bus').hide();
-            $('.van').show();
-            $("#van").addClass('active');
-            $("#car").removeClass('active');
-            $("#bus").removeClass('active');
-        });
-        $('#bus').on('click',function () {
-            $('.car').hide();
-            $('.bus').show();
-            $('.van').hide();
-            $("#bus").addClass('active');
-            $("#car").removeClass('active');
-            $("#van").removeClass('active');
-        });
+        $(".nav-item a").click(function(){
+            $(this).addClass("highlight-home");
+        }); 
     });
 </script>
 @endsection

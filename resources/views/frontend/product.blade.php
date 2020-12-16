@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-6 col-lg-6 text-right">
             <form action="{{ route('vendor-search') }}" method="GET" class="search-form">
-                <i class="fa fa-search search-icon" style="position: absolute; left: 340px;top: 14px;"></i>
+                <i class="fa fa-search search-icon" style="position: absolute; left: 363px;top: 14px;"></i>
                 <input style="padding: 5px 50px 5px 35px;" type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Area Search for Vendor" required>
             </form>
         </div>
@@ -81,51 +81,6 @@
                     cart</a> --}}
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 px-5">
-                <div class="product__details__tab">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                aria-selected="true">Product Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                aria-selected="false">Product Reviews <span>({{$totalProductReviews}})</span></a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <div class="product__details__tab__desc">
-                                <h6>Products Description</h6>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore facilis adipisci
-                                    voluptate fuga accusantium mollitia suscipit cupiditate amet officia quibusdam,
-                                    laudantium ea praesentium, nihil rerum in. Quis asperiores voluptas aliquid.</p>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <div class="product__details__tab__desc">
-                                <ul style="list-style-type: none">
-                                    @forelse ($productReviews as $productReview)
-                                    <a href="#">
-                                        <img width="80px" height="80px" src="{{asset($productReview->avatar)}}">
-                                    </a>
-                                    <span class="pl-5">
-                                        @for ($i = 1; $i < 6; $i++) <i
-                                            class="fa fa-star{{($i<=$productReview->rating) ? '':'No Reviews Yet'}}">
-                                            </i>
-                                            @endfor
-                                    </span>
-                                    <p>{{$productReview->name}}</p>
-                                    @empty
-
-                                    @endforelse
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
             <div class="col-md-5 col-lg-5 product__details__tab">
                 <div id="product-vendor" style="background-color: #f5f5f5;">
                     <h4 class="py-3 text-center" style="background-color: rgb(255, 191, 0);">Product Vendors</h4>
@@ -154,7 +109,6 @@
         </div>
     </div>
 </section>
-@include('frontend.might-like')
 @endsection
 @section('scripts')
 

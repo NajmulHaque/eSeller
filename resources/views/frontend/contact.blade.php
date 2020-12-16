@@ -64,21 +64,6 @@
             </div>
         </div>
     </section>
-    <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.089175441318!2d90.42269834991944!3d23.815427792131548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c64c46dc7541%3A0xcd98d3b733278242!2sNSU%20Main%20Campus%20Rd%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1603736286687!5m2!1sen!2sbd" width="600" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        <div class="map-inside">
-            <i class="icon_pin"></i>
-            <div class="inside-widget">
-                <h4>Bashundhara</h4>
-                <ul>
-                    <li>Phone: +88017000000</li>
-                    <li>Add: Bashundhar, Dhaka</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Map End -->
-
     <!-- Contact Form Begin -->
     <div class="contact-form spad">
         <div class="container">

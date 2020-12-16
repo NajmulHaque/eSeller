@@ -16,8 +16,11 @@
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
+            @if (session()->has('message'))
+                <p class="alert alert-danger text-center">{{session('message')}}</p>
+            @endif
             <h4>Billing Details</h4>
-            <form action="{{ route('checkout.store') }}" method="POST">
+            <form action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
@@ -109,7 +112,8 @@
                         </div>
                         <div class="checkout__input">
                             <p>Order notes<span>*</span></p>
-                            <input type="text" name="note" placeholder="Notes about your order, e.g. special notes for delivery.">
+                            <input type="text" name="note"
+                                placeholder="Notes about your order, e.g. special notes for delivery.">
                         </div>
                         @endif
                     </div>
@@ -119,36 +123,37 @@
                             <div class="checkout__order__products">Products <span>Total</span></div>
                             <ul>
                                 @foreach ($cartDetails as $item)
-                                    <input type="hidden" name="product-name[]" value="{{$item->name}}" id="">
-                                    <input type="hidden" name="quantity[]" value="{{$item->quantity}}" id="">
-                                    <li>{{$item->name}} <i class="fas fa-times px-3"></i> {{$item->quantity}} <span>৳{{$item->getPriceSum($item->id)}}</span></li>
+                                <input type="hidden" name="product-name[]" value="{{$item->name}}" id="">
+                                <input type="hidden" name="quantity[]" value="{{$item->quantity}}" id="">
+                                <li>{{$item->name}} <i class="fas fa-times px-3"></i> {{$item->quantity}}
+                                    <span>৳{{$item->getPriceSum($item->id)}}</span></li>
                                 @endforeach
                             </ul>
-                            <div class="checkout__order__tax">
+                            {{-- <div class="checkout__order__tax">
                                 Tax ({{config('cart.tax')}}%)<span>10</span>
-                            </div>
+                            </div> --}}
                             <div class="checkout__order__subtotal">Subtotal
                                 @if (session()->has('coupon'))
-                                    Discount ({{ session()->get('coupon')['name'] }}) :
-                                    <br>
-                                    <hr>
-                                    New Subtotal <br>
+                                Discount ({{ session()->get('coupon')['name'] }}) :
+                                <br>
+                                <hr>
+                                New Subtotal <br>
                                 @endif
                                 <input type="hidden" name="subtotal" value="{{\Cart::getSubTotal()}}" id="">
                                 <span>৳{{\Cart::getSubTotal()}}</span>
                             </div>
-                            <div class="checkout__order__total">Total 
+                            <div class="checkout__order__total">Total
                                 <input type="hidden" name="total" value="{{\Cart::getTotal()}}" id="">
                                 <span>৳{{\Cart::getTotal()}}</span>
                             </div>
-                            <div class="checkout__input__checkbox">
+                            <div class="checkout__input__checkbox3">
                                 <label for="payment">
                                     Cash On Delivery
                                     <input type="checkbox" name="payment_type" id="payment" value="cash">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="checkout__input__checkbox">
+                            <div class="checkout__input__checkbox2">
                                 <label for="payment2">
                                     Bkash
                                     <input type="checkbox" name="payment_type" id="payment" value="bkash">

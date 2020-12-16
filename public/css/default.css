@@ -1,12 +1,19 @@
-
+@import url(//db.onlinewebfonts.com/c/f14eee643541cf03a10f26c944cc29f5?family=Proxima+Nova);
+body{
+	/* font-family: 'Roboto', sans-serif; */
+	font-family: 'Proxima Nova';
+}
+.highlight {
+	color: #7fad39 !important;
+	font-weight: bold;
+}
 footer a,p{
 	color: #000;
 }
 footer h5{
 	font-weight: bold;
 }
-a:hover,
-a:focus {
+a:hover,a:focus {
 	text-decoration: none;
 	outline: none;
 	color: blue;
@@ -19,7 +26,6 @@ a:focus {
 }
 
 .info-section .product-categories ul {
-	display: ;
 	position: absolute;
 	left: 0;
 	top: 46px;

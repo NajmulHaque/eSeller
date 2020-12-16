@@ -4,7 +4,6 @@
     .vendor-profile {
         text-align: center;
     }
-
     .vendor-profile .vendor-bio img {
         width: 200px;
         border-radius: 50%;
@@ -23,165 +22,10 @@
     .vendor-bio ul li a:hover {
         color: blue;
     }
-
-    body {
-        background-color: #eee
+    #profile{
+        width: 100px;
     }
-
-    .tab-contents {
-        background-color: rgb(230, 228, 228)
-    }
-
-    .nav-tabs .nav-link,
-    .nav-tabs {
-        border: none;
-        color: black
-    }
-
-    .nav-tabs .nav-link:focus {
-        border-bottom: 3px solid blue;
-        font-weight: 700
-    }
-
-    .selected-tab {
-        background-color: rgb(231, 234, 238)
-    }
-
-    .year {
-        margin-left: 100px;
-        font-size: 20px;
-        font-weight: 700;
-        padding-top: 10px
-    }
-
-    .vertical-progress {
-        width: 2px;
-        height: 250px
-    }
-
-    #small-font {
-        font-size: 14px
-    }
-
-    #blue-background {
-        background-color: rgb(233, 243, 245)
-    }
-
-    #dot1,
-    #dot2,
-    #dot3 {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border: 5px solid #fff;
-        border-radius: 50%;
-        background: rgb(21, 90, 194)
-    }
-
-    #arrow {
-        content: "";
-        position: absolute;
-        margin-left: -5px;
-        border-width: 9px;
-        border-style: solid;
-        border-color: white transparent transparent transparent;
-        transform: rotate(90deg)
-    }
-
-    #bluearrow {
-        content: "";
-        position: absolute;
-        margin-left: -5px;
-        border-width: 9px;
-        border-style: solid;
-        border-color: rgb(29, 99, 240) transparent transparent transparent;
-        transform: rotate(90deg)
-    }
-
-    div#info {
-        border: 2px solid orange;
-        margin-top: 8px;
-        padding: 6px;
-    }
-
-    @media(min-width:992px) {
-        #profile {
-            width: 75px;
-            width: 75px
-        }
-
-        .h4 {
-            font-weight: bolder
-        }
-
-        #border-right {
-            border-right: 2px solid rgb(165, 165, 165)
-        }
-
-        #dot1 {
-            left: 112px
-        }
-
-        #dot2 {
-            left: 112px;
-            bottom: 138px
-        }
-
-        #dot3 {
-            left: 112px;
-            bottom: 25px
-        }
-
-        #status1 {
-            position: absolute;
-            width: 300px;
-            height: 50px;
-            left: 150px;
-            bottom: 245px
-        }
-
-        #status2 {
-            position: absolute;
-            width: 300px;
-            height: 50px;
-            left: 150px;
-            bottom: 126px
-        }
-
-        #status3 {
-            position: absolute;
-            width: 300px;
-            height: 50px;
-            left: 150px;
-            bottom: 15px
-        }
-
-        #arrow,
-        #bluearrow {
-            top: 31%;
-            left: -4%
-        }
-
-        .view {
-            height: 360px;
-            margin-top: 5%
-        }
-    }
-    contact-form form textarea {
-    width: 100%;
-    height: 150px;
-    font-size: 16px;
-    color: #6f6f6f;
-    padding-left: 20px;
-    margin-bottom: 24px;
-    border: 1px solid #ebebeb;
-    border-radius: 4px;
-    padding-top: 12px;
-    resize: none;
-}
-
-    /* dummy css for send message */
-        
+}      
 </style>
 @endsection
 @section('content')

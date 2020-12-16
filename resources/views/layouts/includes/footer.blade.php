@@ -1,31 +1,5 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 <footer class="page-footer font-small elegant-color" style="background: rgb(255, 191, 0); color: black">
-  <div class="color-primary">
-    <div class="container">
-      <div class="row py-4 d-flex align-items-center">
-        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-          <h6 class="mb-0">Get connected with us on social networks!</h6>
-        </div>
-        <div class="col-md-6 col-lg-7 text-center text-md-right">
-          <a class="fb-ic">
-            <i class="fab fa-facebook-f white-text mr-4"> </i>
-          </a>
-          <a class="tw-ic">
-            <i class="fab fa-twitter white-text mr-4"> </i>
-          </a>
-          <a class="gplus-ic">
-            <i class="fab fa-google-plus-g white-text mr-4"> </i>
-          </a>
-          <a class="li-ic">
-            <i class="fab fa-linkedin-in white-text mr-4"> </i>
-          </a>
-          <a class="ins-ic">
-            <i class="fab fa-instagram white-text"> </i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="container text-center text-md-left pt-4 pt-md-5">
     <div class="row mt-1 mt-md-0 mb-4 mb-md-0">
       <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">

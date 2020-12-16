@@ -13,27 +13,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endsection
 @section('content')
-<section class="breadcrumb-section py-3" style="background-color: rgb(255, 191, 0)">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text">
-                    <h2>Cart</h2>
-                    <div class="breadcrumb__option">
-                        <a href="{{route('shop.index')}}">Shop</a>
-                        <span>Cart</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="shoping-cart spad">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-12 pb-5 text-center">
+                @if (session()->has('message'))
+                    <p class="alert alert-success text-center">{{ session('message') }}</p>
+                @endif
                 @if (\Cart::getTotalQuantity() > 0)
-                <h4><strong>{{ \Cart::getTotalQuantity()}}</strong> Product(s) In Your Cart</h4>
+                    <h4><strong>{{ \Cart::getTotalQuantity()}}</strong> Product(s) In Your Cart</h4>
                 @else
                 <h4>No Product(s) In Your Cart</h4><br>
                 <a href="{{route('shop.index')}}" class="btn btn-dark">Continue Shopping</a>
@@ -99,18 +87,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="/" class="primary-btn cart-btn" style="background-color: #7fad39;color: #fff;float: right;">CONTINUE SHOPPING</a>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
-                    </div>
+                    <a href="{{ route('shop.index') }}" class="primary-btn cart-btn" style="background-color: #7fad39;color: #fff;float: right;">CONTINUE SHOPPING</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -128,7 +105,6 @@
         </div>
     </div>
 </section>
-@include('frontend.might-like')
 @endsection
 @section('scripts')
 

@@ -54,8 +54,8 @@
     <div class="row">
         @if ($products->total() > 0)
         @forelse ($products as $product)
-        <div class="col-md-12 pb-5">
-            <h2>Search Results</h2>
+        <div class="col-md-12 pb-5 text-center">
+            <h2 style="background-color: rgb(127, 173, 57);color: #fff">Search Results</h2>
             <p class="search-results-count">{{ $products->total() }} result(s) for '{{ request()->input('query') }}'</p>
         </div>
             <div class="col-lg-3 col-md-3 col-sm-3">

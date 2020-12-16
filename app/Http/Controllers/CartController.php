@@ -53,8 +53,10 @@ class CartController extends Controller
         ),201,[]);
     }
     public function remove(Request $request){
-        \Cart::clear();
-        return redirect()->route('cart.index')->with('success_msg', 'Item is removed!');
+        \Cart::remove($request->id);
+        // \Cart::session($request->id)->remove('id');
+        // \Cart::clear($request->id);
+        return redirect()->route('cart.index')->with('message', 'Item is removed!');
     }
 
     public function update(Request $request){

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Darryldecode\Cart\CartCondition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Darryldecode\Cart\CartCollection;
 use Cartalyst\Stripe\Exception\CardErrorException;
 
@@ -29,7 +30,7 @@ class CheckoutController extends Controller
     {
         // Check race condition when there are less items available to purchase
         if ($this->productsAreNoLongerAvailable()) {
-            return back()->withErrors('Sorry! One of the items in your cart is no longer avialble.');
+            return back()->with('message','Sorry! One of the items in your cart is no longer avialble.');
         }
 
         try {

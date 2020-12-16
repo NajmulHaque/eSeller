@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/' , 'PageController@landingPage');
+Route::get('/' , 'PageController@landingPage')->name('landing');
 Route::get('/contact' , 'PageController@contact')->name('contact');
 Route::post('/contact' , 'PageController@contactForm');
 Route::get('/shop' , 'ShopController@index')->name('shop.index');
