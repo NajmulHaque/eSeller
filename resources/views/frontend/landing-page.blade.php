@@ -104,7 +104,7 @@
         </div>
     </div>
 </div>
-<div class="container pt-5" id="product-custom-category">
+{{-- <div class="container pt-5" id="product-custom-category">
     <div class="row">
         <div class="col-md-4 col-lg-4">
             <div id="latest-product" class="carousel slide" data-ride="carousel">
@@ -218,7 +218,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 @section('scripts')
 <script>

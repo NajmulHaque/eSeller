@@ -64,54 +64,6 @@
             </div>
         </div>
     </section>
-    <!-- Contact Form Begin -->
-    <div class="contact-form spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact__form__title">
-                        <h2>Leave Message</h2>
-                    </div>
-                </div>
-            </div>
-            <form method="POST" action="{{ route('contact') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <input type="text" name="name" placeholder="name">
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <input type="email" name="email" placeholder="Email">
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <input type="phone" name="phone" placeholder="Phone">
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <textarea name="message" placeholder="Your message"></textarea>
-                        <button type="submit" class="site-btn">SEND MESSAGE</button>
-                    </div>
-                </div>
-            </form>
-            <div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div id="sub-notification" class="modal-content">
-                        <div class="modal-body">
-                          <div class="row">
-                            <div class="col-md-12 text-center" id="icon">
-                              <h1><i class="fa fa-check-circle"></i></h1>
-                            </div>
-                            <div class="col-md-12 text-center" id="notification">
-                              <p>Thank you for your Message. We will get back to you within 24 hours. For any queries, call us at +8801880199801</p>
-                              <button type="button" class="btn btn-danger btn-sm" id="submit" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-    </div>
-    <!-- Contact Form End -->
 @endsection
 @section('scripts')
    <script type="text/javascript">

@@ -70,19 +70,19 @@
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $product->image }}">
                                         <ul class="product__item__pic__hover">
-                                            <li>
+                                            {{-- <li>
                                                 <a href="#">
                                                 <i class="fa fa-heart"></i>
-                                                {{-- <form action="{{route('wishlist.store')}}" id="contact_form" method="POST">
+                                                <form action="{{route('wishlist.store')}}" id="contact_form" method="POST">
                                                     @csrf
                                                     <input name="user_id" type="hidden" value="{{Auth::user()->id}}" />
                                                     <input name="product_id" type="hidden" value="{{$product->id}}" />
                                                     <button title="add to heart" id="product-cart-btn">
                                                         <i title="add to heart" class="fa fa-heart"></i>
                                                     </button>
-                                                  </form> --}}
+                                                  </form>
                                                </a>
-                                            </li>
+                                            </li> --}}
                                             <li><a href="{{ route('shop.product',$product->id) }}"><i class="fa fa-retweet"></i></a></li>
                                             <li>
                                                 <form action="{{ route('cart.store') }}" method="POST">

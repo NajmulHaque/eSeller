@@ -80,7 +80,6 @@
         <div class="featured__controls pt-5">
             <ul>
                 <li class="active" data-filter=".selling-product">Selling Products</li>
-                <li data-filter=".details">Vendor Details</li>
                 <li data-filter=".customer-review">Customer Review</li>
                 <li data-filter=".send-message">Send Message</li>
             </ul>
@@ -88,52 +87,8 @@
     </div>
 
     <div class="row featured__filter px-5 justify-content-center">
-        <div class="col-lg-10 col-md-10 col-sm-10 mix details" style="display: none">
-            <div class="featured__item">
-                {{-- <h3 class="text-center pb-5">Vendor Basic Information</h3> --}}
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <td>Vendor id</td>
-                            <td>{{$vendorDetail->id}}</td>
-                        </tr>
-                        <tr>
-                            <td>Name:</td>
-                            <td>{{$vendorDetail->name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Address</td>
-                            <td>{{$vendorDetail->address}}</td>
-                        </tr>
-                        <tr>
-                            <td>Phone Number</td>
-                            <td>{{$vendorDetail->phone}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
         <div class="col-lg-10 col-md-10 col-sm-10 mix selling-product" style="display: ">
             <div class="featured__item">
-                <div class="filter__item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-5">
-                            <div class="filter__sort">
-                                <input type="text" placeholder="Search Product">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="filter__found">
-                                <h6><span>{{$totalVendorProducts}}</span> Products found</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <i class="fas fa-bars" style="cursor: pointer;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     @forelse ($vendorProducts as $vendorProduct)
                     <div class="col-lg-4 col-md-6 col-sm-6">

@@ -58,7 +58,7 @@
                 @endguest
                 <div class="header__cart">
                     <ul>
-                        <li class="dropdown">
+                        {{-- <li class="dropdown">
                             <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                                 <i class="fa fa-heart"></i>
                                 <span>0</span>
@@ -69,7 +69,7 @@
                                     @include('frontend.partials.wishlist')
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         <li class="dropdown">
                             <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                                 <i class="fa fa-shopping-cart"></i>
