@@ -28,6 +28,11 @@ class CheckoutController extends Controller
     }
     public function store(Request $request)
     {
+        // $orderMessageToPhone    =   "Hi, ". "A order has been place from *".$request->name.
+        // ", phone: ".$request->phone. ", address:" .$request->address. ", Total Amount: ". $request->subtotal." BDT". ", Products: ".$request->product_name;
+        // if ($orderMessageToPhone) {
+        //     $this->smsSend($request, $orderMessageToPhone);
+        // }
         // Check race condition when there are less items available to purchase
         if ($this->productsAreNoLongerAvailable()) {
             return back()->with('message','Sorry! One of the items in your cart is no longer avialble.');
@@ -116,5 +121,16 @@ class CheckoutController extends Controller
         }
 
         return false;
+    }
+    public function smsSend(Request $request, $orderMessageToPhone)
+    {
+        $to = trim('01754689260');
+        // $message = "Hello form Najmul Shuttle";
+        $curl = curl_init(); 
+        curl_setopt_array($curl, array( CURLOPT_RETURNTRANSFER => 1, CURLOPT_URL => 'http://sms.sslwireless.com/pushapi/dynamic/server.php?user=shuttleltd&pass=90@1B88t&sid=shuttleltd&sms='.urlencode("$orderMessageToPhone").'&msisdn='.$to.'&csmsid=WSDFCV', CURLOPT_USERAGENT => 'Sample cURL Request' ));
+        $resp = curl_exec($curl); 
+
+        curl_close($curl);
+        return 'success';
     }
 }

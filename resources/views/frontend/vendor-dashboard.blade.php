@@ -95,7 +95,6 @@
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="{{asset($vendorProduct->image)}}">
                                 <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="{{ route('shop.product',$vendorProduct->id) }}"><i
                                                 class="fa fa-retweet"></i></a></li>
                                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -153,6 +152,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-lg-12 text-center">
+                            <input type="hidden" name="vendor_id" value="{{$vendorDetail->id}}">
                             <textarea name="message" placeholder="Type your message..."></textarea>
                             <button type="submit" class="site-btn">SEND MESSAGE</button>
                         </div>

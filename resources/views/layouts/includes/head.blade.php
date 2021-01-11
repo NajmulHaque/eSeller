@@ -4,7 +4,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" href="{{ asset('images/web-icon.png')}}" type="image/gif" sizes="50*50">
     <title>@yield('title', $page_title ?? '')</title>
 
     <!-- Scripts -->

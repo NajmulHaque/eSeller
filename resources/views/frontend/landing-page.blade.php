@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title','Buyer and Street Vendor Communication and Order Service')
 @section('styles')
 <style>
     .home {
@@ -68,12 +69,6 @@
                                 <div class="info-search-form">
                                     <form action="{{ route('search') }}" method="GET">
                                         <div class="search-box">
-                                            <select name="" id="category-select">
-                                                <option value="">All Categories</option>
-                                                @foreach ($categories as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                                @endforeach
-                                            </select>
                                             <input type="text" name="query" placeholder="type your product name">
                                             <button style="background-color: #FFA500" type="submit"
                                                 class="btn">search</button>
@@ -104,121 +99,6 @@
         </div>
     </div>
 </div>
-{{-- <div class="container pt-5" id="product-custom-category">
-    <div class="row">
-        <div class="col-md-4 col-lg-4">
-            <div id="latest-product" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <h4>Latest Products</h4>
-                    <div class="carousel-item active">
-                        @foreach ($latestProducts as $latestproduct)
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ $latestproduct->image }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ $latestproduct->name}} {{ $latestproduct->details}}</h6>
-                                    <span>৳{{ $latestproduct->price}}</span>
-                                </div>
-                            </a>
-                        </div>
-                        @endforeach
-                    </div>
-                    <div class="carousel-item">
-                        <div class="latest-prdouct__slider__item">
-                            @foreach ($latestProducts as $latestProduct)
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ $latestProduct->image}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ $latestProduct->name }} {{ $latestproduct->details}}</h6>
-                                    <span>৳{{ $latestProduct->price }}</span>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-4">
-            <div id="top-rated-product" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <h4>Top Rated Products</h4>
-                    <div class="carousel-item active">
-                        <div class="latest-prdouct__slider__item">
-                            @foreach ($topRatedProducts as $topRatedProduct)
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ $topRatedProduct->image}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ $topRatedProduct->name }} {{ $topRatedProduct->details }}</h6>
-                                    <span>৳{{ $topRatedProduct->price}}</span>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="latest-prdouct__slider__item">
-                            @foreach ($topRatedProducts as $topRatedProduct)
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ $topRatedProduct->image}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ $topRatedProduct->name }} {{ $topRatedProduct->details }}</h6>
-                                    <span>৳{{ $topRatedProduct->price}}</span>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-4">
-            <div id="latest-product" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <h4>Review Products</h4>
-                    <div class="carousel-item active">
-                        <div class="latest-prdouct__slider__item">
-                            @foreach ($reviewProducts as $reviewProduct)
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{$reviewProduct->image}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{$reviewProduct->name}} {{$reviewProduct->details}}</h6>
-                                    <span>৳{{$reviewProduct->price}}</span>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="latest-prdouct__slider__item">
-                            @foreach ($reviewProducts as $reviewProduct)
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{$reviewProduct->image}}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{$reviewProduct->name}} {{$reviewProduct->details}}</h6>
-                                    <span>৳{{$reviewProduct->price}}</span>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 @endsection
 @section('scripts')
 <script>

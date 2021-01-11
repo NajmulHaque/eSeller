@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -33,6 +34,11 @@ class UserController extends Controller
     }
     public function message(Request $request)
     {
-        dd($request->toArray());
+        DB::table('user_message_for_vendor')->insert([
+            'user_id'   =>  auth()->user()->id,
+            'vendor_id' => $request->vendor_id,
+            'message' => $request->message,
+        ]);
+        return redirect()->back();
     }
 }

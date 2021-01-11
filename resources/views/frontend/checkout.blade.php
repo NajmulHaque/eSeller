@@ -123,8 +123,8 @@
                             <div class="checkout__order__products">Products <span>Total</span></div>
                             <ul>
                                 @foreach ($cartDetails as $item)
-                                <input type="hidden" name="product-name[]" value="{{$item->name}}" id="">
-                                <input type="hidden" name="quantity[]" value="{{$item->quantity}}" id="">
+                                <input type="hidden" name="product_name" value="{{$item->name}}" id="">
+                                <input type="hidden" name="quantity" value="{{$item->quantity}}" id="">
                                 <li>{{$item->name}} <i class="fas fa-times px-3"></i> {{$item->quantity}}
                                     <span>৳{{$item->getPriceSum($item->id)}}</span></li>
                                 @endforeach
@@ -149,14 +149,14 @@
                             <div class="checkout__input__checkbox3">
                                 <label for="payment">
                                     Cash On Delivery
-                                    <input type="checkbox" name="payment_type" id="payment" value="cash">
+                                    <input type="radio" name="payment_type" id="payment" value="cash">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="checkout__input__checkbox2">
                                 <label for="payment2">
                                     Bkash
-                                    <input type="checkbox" name="payment_type" id="payment" value="bkash">
+                                    <input type="radio" name="payment_type" id="payment" value="bkash">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
