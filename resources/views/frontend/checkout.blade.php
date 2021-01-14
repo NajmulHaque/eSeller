@@ -123,7 +123,8 @@
                             <div class="checkout__order__products">Products <span>Total</span></div>
                             <ul>
                                 @foreach ($cartDetails as $item)
-                                <input type="hidden" name="product_name" value="{{$item->name}}" id="">
+                                <input type="hidden" name="product_name[]" value="{{$item->name}}" id="">
+                                <input type="hidden" name="vendor_id" value="{{$item->attributes->vendor_id}}" id="">
                                 <input type="hidden" name="quantity" value="{{$item->quantity}}" id="">
                                 <li>{{$item->name}} <i class="fas fa-times px-3"></i> {{$item->quantity}}
                                     <span>৳{{$item->getPriceSum($item->id)}}</span></li>

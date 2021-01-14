@@ -47,7 +47,7 @@
                                     <h5>{{$item->name}}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    ৳{{$item->price}}
+                                    ৳{{$item->price}}{{$item->details}}
                                 </td>
                                 <td class="shoping__cart__quantity pl-5 pt-5">
                                     <div class="quantity">
