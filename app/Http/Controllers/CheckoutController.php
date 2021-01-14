@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Darryldecode\Cart\CartCollection;
 use Cartalyst\Stripe\Exception\CardErrorException;
+use App\Models\Vendor;
 
 class CheckoutController extends Controller
 {
@@ -28,12 +29,15 @@ class CheckoutController extends Controller
     }
     public function store(Request $request)
     {
-        // $orderMessageToPhone    =   "Hi, ". "A order has been place from *".$request->name.
-        // ", phone: ".$request->phone. ", address:" .$request->address. ", Total Amount: ". $request->subtotal." BDT". ", Products: ".$request->product_name;
-        // if ($orderMessageToPhone) {
-        //     $this->smsSend($request, $orderMessageToPhone);
-        // }
-        // Check race condition when there are less items available to purchase
+            // $products = json_encode($request->product_name);
+            $product = implode(", ",$request->product_name);
+            //bad side ->
+            $orderMessageToPhone    =   "Hi, ". "A order has been place from *".$request->name.
+            ", phone: ".$request->phone. ", address:" .$request->address. ", Total Amount: ". $request->subtotal." BDT". ", Products: ".$product;
+            if ($orderMessageToPhone) {
+                $this->smsSend($request, $orderMessageToPhone);
+            }
+        //Check race condition when there are less items available to purchase
         if ($this->productsAreNoLongerAvailable()) {
             return back()->with('message','Sorry! One of the items in your cart is no longer avialble.');
         }
@@ -124,8 +128,11 @@ class CheckoutController extends Controller
     }
     public function smsSend(Request $request, $orderMessageToPhone)
     {
-        $to = trim('01754689260');
-        // $message = "Hello form Najmul Shuttle";
+        dd($orderMessageToPhone);
+        $vendor_details =   Vendor::find($request->vendor_id);
+        // $to = trim('01754689260');
+        $to = trim($vendor_details->phone);
+        // dd($to);
         $curl = curl_init(); 
         curl_setopt_array($curl, array( CURLOPT_RETURNTRANSFER => 1, CURLOPT_URL => 'http://sms.sslwireless.com/pushapi/dynamic/server.php?user=shuttleltd&pass=90@1B88t&sid=shuttleltd&sms='.urlencode("$orderMessageToPhone").'&msisdn='.$to.'&csmsid=WSDFCV', CURLOPT_USERAGENT => 'Sample cURL Request' ));
         $resp = curl_exec($curl); 

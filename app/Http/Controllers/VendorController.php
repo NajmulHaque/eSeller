@@ -19,7 +19,7 @@ class VendorController extends Controller
         $totalVendorProducts    =   $vendorProducts->count();
         $vendorReviews  =   Vendor::join('vendor_reviews','vendor_reviews.vendor_id','=','vendors.id')
             ->leftjoin('users','users.id','vendor_reviews.user_id')
-            ->select('vendor_reviews.rating','vendor_reviews.comments','vendor_reviews.created_at','users.name','users.avatar','users.id')
+            ->select('vendor_reviews.rating','vendor_reviews.created_at','users.name','users.avatar','users.id')
             ->where('vendors.id','=',$vendorId)->paginate(2);
         $totalVendorReview  =   $vendorReviews->count();
         return view('frontend.vendor-dashboard')->with([

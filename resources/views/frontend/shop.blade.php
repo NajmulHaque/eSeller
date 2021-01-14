@@ -88,6 +88,7 @@
                                                 <form action="{{ route('cart.store') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" value="{{ $product->id }}" id="id" name="id">
+                                                    <input type="hidden" value="{{ $product->vendor_id }}" id="vendor_id" name="vendor_id">
                                                     <input type="hidden" value="{{ $product->name }}" id="name" name="name">
                                                     <input type="hidden" value="{{ $product->price }}" id="price" name="price">
                                                     <input type="hidden" value="{{ $product->details }}" id="details"

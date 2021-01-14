@@ -20,6 +20,7 @@ Route::get('/shop' , 'ShopController@index')->name('shop.index');
 Route::get('/shop/product/{id}', 'ShopController@product')->name('shop.product');
 Route::get('/search', 'ShopController@search')->name('search');
 Route::get('/vendor-search', 'ShopController@vendorSearch')->name('vendor-search');
+Route::post('/vendor-rating/{vendor_id}', 'PageController@vendorRating')->name('vendor-rating')->middleware('auth');
 Route::get('/shop/cart', 'CartController@cart')->name('cart.index');
 // Route::resource('/wishlist', 'WishlistController', ['except' => ['create', 'edit', 'show', 'update']]);
 Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');

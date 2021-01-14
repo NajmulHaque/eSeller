@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -66,5 +67,15 @@ class PageController extends Controller
     public function vendor()
     {
         return view('frontend.vendor-dashboard');
+    }
+    public function vendorRating(Request $request, $vendor_id)
+    {
+        DB::table('vendor_reviews')->insert([
+            'user_id'   =>  auth()->user()->id,
+            'vendor_id'   =>  $vendor_id,
+            'rating'   =>  $request->rating,
+            'created_at' => now(),
+        ]);
+        return redirect()->back()->with('message','Your rating is received. Thank your for your Feedback');
     }
 }

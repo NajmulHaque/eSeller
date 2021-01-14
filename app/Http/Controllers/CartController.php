@@ -10,25 +10,24 @@ class CartController extends Controller
 {
     public function cart()
     {
-
         $mightAlsoLike = Product::inRandomOrder()->take(4)->get();
         $cartDetails    =   \Cart::getContent();
-        // dd($cartDetails);
         return view('frontend.cart')->with([
             'cartDetails' => $cartDetails,
             'mightAlsoLike' => $mightAlsoLike,
         ]);
     }
-    public function add(Request$request){
+    public function add(Request $request){
         \Cart::add(array(
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
-            'details' => $request->details,
             'quantity' => $request->quantity,
             'attributes' => array(
                 'image' => $request->img,
-                'slug' => $request->slug
+                'slug' => $request->slug,
+                'vendor_id' => $request->vendor_id,
+                'details' => $request->details,
             )
         ));
         return redirect()->route('cart.index')->with('success_msg', 'Item is Added to Cart!');
